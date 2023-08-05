@@ -28,6 +28,7 @@ async def forward_messages(event):
                     await client.forward_messages(entity=channel, messages=event.message)
     elif event.message.text:
         if "DerivBotManager" not in event.message.text:
+            print("dllla")
             for channel in destination_channels:
                 await client.send_message(entity=channel, message=event.message.text)
     elif event.message.photo and event.message.caption:
