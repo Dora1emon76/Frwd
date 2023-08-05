@@ -31,7 +31,7 @@ async def forward_messages(event):
                 for channel in destination_channels:
                     await client.forward_messages(entity=channel, messages=event.message)
     elif event.message.text:
-        print("Debug - Message has text")
+        print(f"Debug - Message has text {event.message.text}")
         if "DerivBotManager" not in event.message.text:
             print("Debug - 'DerivBotManager' not found in text")
             for channel in destination_channels:
