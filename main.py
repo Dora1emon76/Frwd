@@ -2,9 +2,9 @@ from telethon import TelegramClient, events, Button
 import asyncio
 
 # Set your API ID, API hash, and phone number with country code
-api_id = 25866651
-api_hash = '0581d6e46af16c717302fe1ab46b4147'
-phone_number = '+918092409837'
+api_id = 28558549
+api_hash = '7aa7cc23963372ec5bcd5baf56d9817e'
+phone_number = '+2348120541489'
 
 client = TelegramClient('session_name', api_id=api_id, api_hash=api_hash)
 
@@ -13,9 +13,9 @@ client.start(phone=phone_number)
 print('Client started successfully!')
 
 # Define the channels to forward messages to
-destination_channels = ["@Rest516", "@rest516"]
-
-@client.on(events.NewMessage(chats=["@rest516"]))
+destination_channels = ["@binary_GoldForex", "@xaussdForexGoat_Signals","FXpremiere_freeCrypto"]
+source = "@rest516"
+@client.on(events.NewMessage(chats=[source]))
 async def forward_messages(event):
     if event.message.fwd_from:
         if event.message.text:
