@@ -18,9 +18,11 @@ destination_channels = ["@Rest516", "@rest516"]
 async def forward_messages(event):
     if not event.message.fwd_from:
         if event.message.text and "hello" not in event.message.text.lower():
-            await client.forward_messages(entity=destination_channels, messages=event.message)
+            for channel in destination_channels:
+                await client.forward_messages(entity=channel, messages=event.message)
         elif event.message.photo and event.message.caption and "hello" not in event.message.caption.lower():
-            await client.forward_messages(entity=destination_channels, messages=event.message)
+            for channel in destination_channels:
+                await client.forward_messages(entity=channel, messages=event.message)
         else:
             await event.reply("Message does not meet forwarding conditions.")
 
