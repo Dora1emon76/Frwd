@@ -27,7 +27,7 @@ async def forward_messages(event):
         elif event.message.text:
             if "DerivBotManager" not in event.message.text:
                 for channel in destination_channels:
-                    await client.send_message(entity=channel, message=event.message.text)
+                    await client.send_message(entity=channel, message=f"event.message.text{["☄️"](5224607267797606837))
     else:
         if "DerivBotManager" not in event.message.text:
             for channel in destination_channels:
