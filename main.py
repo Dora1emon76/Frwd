@@ -13,8 +13,9 @@ client.start(phone=phone_number)
 print('Client started successfully!')
 
 # Define the channels to forward messages to
-destination_channels = ["@binary_GoldForex", "@xaussdForexGoat_Signals","FXpremiere_freeCrypto"]
+destination_channels = ["@binary_GoldForex", "@xaussdForexGoat_Signals", "FXpremiere_freeCrypto"]
 source = "@rest516"
+
 @client.on(events.NewMessage(chats=[source]))
 async def forward_messages(event):
     print(event.message)
@@ -22,7 +23,7 @@ async def forward_messages(event):
         if event.message.photo and event.message.text:
             if "DerivBotManager" not in event.message.text:
                 for channel in destination_channels:
-                await client.send_file(entity=channel, file=event.message.photo, caption=event.message.text) 
+                    await client.send_file(entity=channel, file=event.message.photo, caption=event.message.text)
         elif event.message.text:
             if "DerivBotManager" not in event.message.text:
                 for channel in destination_channels:
@@ -31,7 +32,6 @@ async def forward_messages(event):
         if "DerivBotManager" not in event.message.text:
             for channel in destination_channels:
                 await client.forward_messages(entity=channel, messages=event.message)
-    
+
 # Run the client until disconnected
 client.run_until_disconnected()
-        
