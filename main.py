@@ -19,7 +19,7 @@ source = "@rest516"
 @client.on(events.NewMessage(chats=[source]))
 async def forward_messages(event):
     print(event.message)
-    if event.message.text:
+    if event.message.text is not None:
         if "DerivBotManager" not in event.message.text:
             if event.message.fwd_from is None:
                 if event.message.photo:
@@ -32,6 +32,7 @@ async def forward_messages(event):
                 for channel in destination_channels:
                     await client.forward_messages(entity=channel, messages=event.message)
     elif event.message.text is None:
+        print("hh")
         if event.message.fwd_from is None:
             if event.message.photo:
                 for channel in destination_channels:
