@@ -35,10 +35,7 @@ async def forward_messages(event):
         if event.message.fwd_from is None:
             if event.message.photo:
                 for channel in destination_channels:
-                    await client.send_file(entity=channel, file=event.message.photo, caption=event.message.text)
-            elif event.message.photo is None:
-                for channel in destination_channels:
-                    await client.send_message(entity=channel, message=event.message.text)
+                    await client.send_file(entity=channel, file=event.message.photo)
         else:
             for channel in destination_channels:
                 await client.forward_messages(entity=channel, messages=event.message)
