@@ -19,19 +19,28 @@ source = "@rest516"
 @client.on(events.NewMessage(chats=[source]))
 async def forward_messages(event):
     print(event.message)
-    if event.message.fwd_from is None:
-        if event.message.photo and event.message.text:
-            if "DerivBotManager" not in event.message.text:
+    if event.message.text:
+        if "DerivBotManager" not in event.message.text:
+            if event.message.fwd_from is None:
+                if event.message.photo:
+                    for channel in destination_channels:
+                        await client.send_file(entity=channel, file=event.message.photo, caption=event.message.text)
+                elif event.message.photo is None:
+                    for channel in destination_channels:
+                        await client.send_message(entity=channel, message=event.message.text)
+            else:
+                for channel in destination_channels:
+                    await client.forward_messages(entity=channel, messages=event.message)
+    elif event.message.text is None:
+        if event.message.fwd_from is None:
+            if event.message.photo:
                 for channel in destination_channels:
                     await client.send_file(entity=channel, file=event.message.photo, caption=event.message.text)
-        elif event.message.text:
-            if "DerivBotManager" not in event.message.text:
+            elif event.message.photo is None:
                 for channel in destination_channels:
                     await client.send_message(entity=channel, message=event.message.text)
-    else:
-        if "DerivBotManager" not in event.message.text:
+        else:
             for channel in destination_channels:
                 await client.forward_messages(entity=channel, messages=event.message)
-
 # Run the client until disconnected
 client.run_until_disconnected()
